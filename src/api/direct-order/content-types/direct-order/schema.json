@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "direct_orders",
+  "info": {
+    "singularName": "direct-order",
+    "pluralName": "direct-orders",
+    "displayName": "Direct Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "address": {
+      "type": "json"
+    },
+    "product": {
+      "type": "json"
+    },
+    "totalPrice": {
+      "type": "float"
+    },
+    "isDelivered": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "private": true
+    }
+  }
+}

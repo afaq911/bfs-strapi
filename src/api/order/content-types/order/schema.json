@@ -34,8 +34,14 @@
       "private": true
     },
     "total_amount": {
-      "type": "biginteger",
+      "type": "float",
       "required": true
+    },
+    "isDelivered": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "private": true
     }
   }
 }

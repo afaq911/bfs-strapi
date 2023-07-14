@@ -1,4 +1,10 @@
+const {
+  SendMailOrderRecipt,
+  SendMailToUser,
+} = require("../../../../utils/SendMail");
+
 const stripe = require("stripe")(process.env.STRIPE_KEY);
+
 ("use strict");
 
 /**
@@ -26,7 +32,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     try {
       if (totalPrice === subTotal) {
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: totalPrice * 100,
+          amount: (totalPrice + 50 + 29.5) * 100,
           currency: "usd",
           automatic_payment_methods: {
             enabled: true,
@@ -39,7 +45,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
             products: products,
             shipping_address: shipping_address,
             stripeId: paymentIntent.id,
-            total_amount: totalPrice,
+            total_amount: Number(totalPrice + 50 + 29.5),
           },
         });
 
@@ -76,6 +82,20 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
           isPaid: true,
         },
       });
+
+      const orderDetails = await strapi.db.query("api::order.order").findOne({
+        where: {
+          stripeId: {
+            $eq: stripe_id,
+          },
+        },
+      });
+
+      // Send Email to Admin --------------------------------------------------------------
+      await SendMailOrderRecipt(orderDetails);
+
+      // Send Email to User --------------------------------------------------------------
+      await SendMailToUser(orderDetails);
 
       ctx.response.send(
         {

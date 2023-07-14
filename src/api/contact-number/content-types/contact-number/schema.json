@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_numbers",
+  "info": {
+    "singularName": "contact-number",
+    "pluralName": "contact-numbers",
+    "displayName": "Contact Number"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "whatsapp",
+        "call"
+      ]
+    },
+    "number": {
+      "type": "string"
+    }
+  }
+}
