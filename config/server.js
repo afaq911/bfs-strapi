@@ -4,6 +4,7 @@ module.exports = ({ env }) => ({
   url: process.env.STRAPI_URL,
   app: {
     keys: env.array("APP_KEYS"),
+    Proxy: true,
   },
   webhooks: {
     populateRelations: env.bool("WEBHOOKS_POPULATE_RELATIONS", false),
