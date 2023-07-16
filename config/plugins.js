@@ -4,7 +4,7 @@ module.exports = ({ env }) => ({
       provider: "strapi-provider-email-smtp",
       providerOptions: {
         host: "smtp.gmail.com",
-        port: 465,
+        port: 587,
         secure: true,
         username: env("USER_EMAIL_COMPANY"),
         password: env("USER_PASSWORD_COMPANY"),
@@ -19,3 +19,5 @@ module.exports = ({ env }) => ({
     },
   },
 });
+
+// port: 465,
