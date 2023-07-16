@@ -1,17 +1,17 @@
 module.exports = ({ env }) => ({
   email: {
-    provider: "nodemailer",
-    providerOptions: {
-      host: "smtp-relay.brevo.com",
-      port: 587,
-      secure: true,
-      auth: {
-        user: "afaqhaider911@gmail.com",
-        pass: "NhCPDkOFYgzUp5vQ",
+    config: {
+      provider: "strapi-provider-email-smtp",
+      providerOptions: {
+        host: env("SMTP_HOST"),
+        port: env("SMTP_PORT"),
+        secure: true,
+        username: env("SMTP_USER"),
+        password: env("SMTP_PASSWORD"),
+        rejectUnauthorized: true,
+        requireTLS: true,
+        connectionTimeout: 1,
       },
-      rejectUnauthorized: true,
-      requireTLS: true,
-      connectionTimeout: 1,
     },
     settings: {
       defaultFrom: env("EMAIL_RECIPT_RECIEVER"),
@@ -19,27 +19,3 @@ module.exports = ({ env }) => ({
     },
   },
 });
-
-// module.exports = ({ env }) => ({
-//   email: {
-//     config: {
-//       provider: "strapi-provider-email-smtp",
-//       providerOptions: {
-//         host: "smtp.gmail.com",
-//         port: 587,
-//         secure: true,
-//         username: env("USER_EMAIL_COMPANY"),
-//         password: env("USER_PASSWORD_COMPANY"),
-//         rejectUnauthorized: true,
-//         requireTLS: true,
-//         connectionTimeout: 1,
-//       },
-//     },
-//     settings: {
-//       defaultFrom: env("EMAIL_RECIPT_RECIEVER"),
-//       defaultReplyTo: env("EMAIL_RECIPT_SENDER"),
-//     },
-//   },
-// });
-
-// port: 465,
