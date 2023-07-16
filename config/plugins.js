@@ -2,12 +2,12 @@ module.exports = ({ env }) => ({
   email: {
     provider: "nodemailer",
     providerOptions: {
-      host: "smtp.gmail.com",
+      host: "smtp-relay.brevo.com",
       port: 587,
       secure: true,
       auth: {
-        user: env("USER_EMAIL_COMPANY"),
-        pass: env("USER_PASSWORD_COMPANY"),
+        user: "afaqhaider911@gmail.com",
+        pass: "NhCPDkOFYgzUp5vQ",
       },
       rejectUnauthorized: true,
       requireTLS: true,

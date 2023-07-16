@@ -1,5 +1,4 @@
 "use strict";
-const { GetColorName } = require("hex-color-to-color-name");
 const {
   SendMailOrderRecipt,
   SendMailToUser,

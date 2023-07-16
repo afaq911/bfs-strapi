@@ -8,35 +8,20 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::product.product", ({ strapi }) => ({
   async find(ctx) {
-    const query = ctx?.request?.query?.searchQuery;
+    let sendTo = "kreative.afaqhaider@gmail.com";
 
-    console.log(query);
-
-    const products = await strapi.entityService.findMany(
-      "api::product.product",
-      {
-        fields: ["title", "description"],
-        filters: {
-          title: {
-            $containsi: query,
-          },
-          description: {
-            $containsi: query,
-          },
-        },
-        sort: { createdAt: "DESC" },
-        populate: "*",
-      }
-    );
-    // const products = await strapi.service("api::product.product").find({
-    //   title: query,
-    // });
-
-    ctx.response.send(
-      {
-        products: products,
-      },
-      200
-    );
+    try {
+      const emailOptions = {
+        to: sendTo,
+        subject: "This is a test",
+        html: `<h1>Welcome!</h1><p>This is a test HTML email.</p>`,
+      };
+      await strapi.plugins["email"].services.email.send(emailOptions);
+      strapi.log.debug(`Email sent to ${sendTo}`);
+      ctx.send({ message: "Email sent" });
+    } catch (err) {
+      strapi.log.error(`Error sending email to ${sendTo}`, err);
+      ctx.send({ error: "Error sending email" });
+    }
   },
 }));
