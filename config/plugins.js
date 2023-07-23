@@ -19,3 +19,5 @@ module.exports = ({ env }) => ({
     },
   },
 });
+
+// strapi-provider-email-smtp
